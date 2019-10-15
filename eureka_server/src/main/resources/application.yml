@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: eureka_server
+  cloud:
+    config:
+      profile: dev
+      url: http://localhost:7006/
+
+
+
+
