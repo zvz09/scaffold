@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    config:
+      name: service-admin
+      profile: dev
+      discovery:
+        enabled: true
+        serviceId: config-server

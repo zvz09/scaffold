@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>scaffold</artifactId>
         <groupId>com.zvz</groupId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
+    <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>service-zuul</artifactId>
+    <artifactId>service-admin</artifactId>
     <packaging>jar</packaging>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>service-zuul</name>
-    <description>Demo project for Spring Boot</description>
 
     <dependencies>
         <!-- Spring Boot Begin -->
@@ -24,6 +22,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -49,10 +51,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
-        </dependency>
         <!-- Spring Cloud End -->
 
         <!-- Spring Boot Admin Begin -->
@@ -62,7 +60,7 @@
         </dependency>
         <dependency>
             <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-client</artifactId>
+            <artifactId>spring-boot-admin-starter-server</artifactId>
         </dependency>
         <!-- Spring Boot Admin End -->
     </dependencies>
@@ -73,7 +71,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.funtl.itoken.zuul.ZuulApplication</mainClass>
+                    <mainClass>com.funtl.itoken.admin.AdminApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
