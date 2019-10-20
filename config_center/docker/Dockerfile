@@ -30,8 +30,5 @@ COPY $APP_NAME $WORK_PATH/
 # WORKDIR
 WORKDIR $WORK_PATH
 
-# ENTRYPOINT
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom"]
-
 # CMD
 CMD ["-jar", "@project.build.finalName@.@project.packaging@"]
