@@ -1,7 +1,5 @@
 FROM openjdk:8-stretch
-RUN mkdir /app
-COPY config_center-0.0.1-SNAPSHOT.jar  /app/
-
-CMD java -jar /app/config_center-0.0.1-SNAPSHOT.jar  --spring.profiles.active=dev
-
-EXPOSE 7006
+MAINTAINER docker_maven docker_maven@email.com
+WORKDIR /ROOT
+CMD ["java", "-version"]
+ENTRYPOINT ["java", "-jar", "${project.build.finalName}.jar"]
