@@ -103,7 +103,7 @@
                 <version>0.4.13</version>
                 <configuration>
                     <dockerHost>http://192.168.1.12:2375</dockerHost>
-                    <imageName>192.168.1.12:5100/microservice-erueka:0.2</imageName>
+                    <imageName>192.168.1.12:5100/${artifactId}:0.2</imageName>
                     <baseImage>java</baseImage>
                     <entryPoint>["java","-jar","/${project.build.finalName}.jar"]</entryPoint>
                     <resources>
