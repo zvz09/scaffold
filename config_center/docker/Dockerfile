@@ -9,7 +9,7 @@ ENV WORK_PATH /home/project/dockerdemo
 ENV APP_NAME @project.build.finalName@.@project.packaging@
 ENV APP_VERSION @project.version@
 
-EXPOSE 8080
+#EXPOSE 8080
 
 #USER
 #USER user:group
