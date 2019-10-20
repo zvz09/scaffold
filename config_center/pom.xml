@@ -16,7 +16,9 @@
     <description>Demo project for Spring Boot</description>
 
     <properties>
-        <docker.image.prefix>zvz</docker.image.prefix>
+        <docker.repostory>registry.cn-hangzhou.aliyuncs.com</docker.repostory>
+        <docker.registry.name>viiso</docker.registry.name>
+
     </properties>
 
     <dependencies>
@@ -69,24 +71,41 @@
 
 
     <build>
+
+        <resources><!-- 使用@@站位符，输出Dockerfile至docker文件夹 -->
+            <resource>
+                <directory>docker</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/Dockerfile</include>
+                </includes>
+                <targetPath>../docker</targetPath>
+            </resource>
+        </resources>
+
         <plugins>
-            <plugin>
+            <plugin><!-- 置顶 -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.funtl.itoken.config.ConfigApplication</mainClass>
+                    <failOnNoGitDirectory>false</failOnNoGitDirectory>
                 </configuration>
             </plugin>
 
-            <!--docker-maven-plugin插件(带Dockerfile文件)-->
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.4.13</version>
                 <configuration>
-                    <imageName>${project.name}:${project.version}</imageName>
-                    <!--Dockerfile文件位置-->
-                    <dockerDirectory>docker</dockerDirectory>
+                    <dockerHost>http://192.168.1.12:2375</dockerHost>
+                    <imageName>192.168.1.12:5000/microservice-erueka:0.2</imageName>
+                    <baseImage>java</baseImage>
+                    <entryPoint>["java","-jar","/${project.build.finalName}.jar"]</entryPoint>
                     <resources>
                         <resource>
                             <targetPath>/</targetPath>

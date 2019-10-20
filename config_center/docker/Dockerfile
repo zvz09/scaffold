@@ -1,5 +1,37 @@
-FROM openjdk:8-stretch
-MAINTAINER docker_maven docker_maven@email.com
-WORKDIR /ROOT
-CMD ["java", "-version"]
-ENTRYPOINT ["java", "-jar", "${project.build.finalName}.jar"]
+
+# Version 0.0.1
+FROM java:8
+
+MAINTAINER Ryuu KK "ryuu_kk@163.com"
+
+# 环境变量
+ENV WORK_PATH /home/project/dockerdemo
+ENV APP_NAME @project.build.finalName@.@project.packaging@
+ENV APP_VERSION @project.version@
+
+EXPOSE 8080
+
+#USER
+#USER user:group
+
+#VOLUME
+VOLUME ["/home/project", "/tmp/data"]
+
+#ADD
+
+#COPY
+COPY $APP_NAME $WORK_PATH/
+
+#LABEL
+#STOPSIGNAL
+#ARG
+#ONBUILD
+
+# WORKDIR
+WORKDIR $WORK_PATH
+
+# ENTRYPOINT
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom"]
+
+# CMD
+CMD ["-jar", "@project.build.finalName@.@project.packaging@"]
