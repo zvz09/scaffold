@@ -72,7 +72,7 @@
 
     <build>
 
-        <resources><!-- 使用@@站位符，输出Dockerfile至docker文件夹 -->
+       <!-- <resources>&lt;!&ndash; 使用@@站位符，输出Dockerfile至docker文件夹 &ndash;&gt;
             <resource>
                 <directory>docker</directory>
                 <filtering>true</filtering>
@@ -81,7 +81,7 @@
                 </includes>
                 <targetPath>../docker</targetPath>
             </resource>
-        </resources>
+        </resources>-->
 
         <plugins>
             <plugin><!-- 置顶 -->
