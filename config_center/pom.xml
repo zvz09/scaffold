@@ -18,7 +18,10 @@
     <properties>
         <docker.repostory>registry.cn-hangzhou.aliyuncs.com</docker.repostory>
         <docker.registry.name>viiso</docker.registry.name>
-
+        <!--maven.build.timestamp保存了maven编译时间戳-->
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <!--指定时间格式-->
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
     </properties>
 
     <dependencies>
@@ -96,13 +99,33 @@
                     <failOnNoGitDirectory>false</failOnNoGitDirectory>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <id>timestamp-property</id>
+                        <goals>
+                            <goal>timestamp-property</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <name>build.time</name>
+                    <pattern>yyyy-MM-dd HH:mm</pattern>
+                    <timeZone>GMT+8</timeZone>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.4.13</version>
                 <configuration>
                     <dockerHost>http://192.168.1.12:2375</dockerHost>
-                    <imageName>192.168.1.12:5100/${artifactId}:0.2</imageName>
+                    <imageName>192.168.1.12:5100/${artifactId}:${build.time}</imageName>
                     <baseImage>java</baseImage>
                     <entryPoint>["java","-jar","/${project.build.finalName}.jar"]</entryPoint>
                     <resources>
