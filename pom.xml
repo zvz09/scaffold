@@ -13,6 +13,7 @@
         <module>service-zipkin</module>
         <module>service-admin</module>
         <module>service-auth</module>
+        <module>service-gateway</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
