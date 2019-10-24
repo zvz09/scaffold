@@ -19,6 +19,6 @@ server:
       serviceUrl:
         defaultZone: http://localhost:8761/eureka/
 app:
-  version: @project.version@
+  version: version
   build:
-    time: @build.time@
+    time: time
