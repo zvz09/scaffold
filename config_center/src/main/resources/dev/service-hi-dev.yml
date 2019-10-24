@@ -9,3 +9,24 @@ spring:
     name: service-hi
   zipkin:
     base-url: http://localhost:9411
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.1.12:33306/Spring_OAuth2_Demo?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+    username: root
+    password: timmysql
+
+    jpa:
+      hibernate:
+        ddl-auto: update
+      show-sql: true
+
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://localhost:5000/uaa/users/current #获取当前Token的用户信息
+      client:
+        clientId: service-hi
+        clientSecret: 123456
+        accessTokenUri: http://localhost:5000/uaa/oauth/token #获取Token
+        grant-type: client_credentials,password
+        scope: server
