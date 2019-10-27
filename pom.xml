@@ -15,6 +15,7 @@
         <module>service-auth</module>
         <module>service-gateway</module>
         <module>service-auth-jwt</module>
+        <module>service-user</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

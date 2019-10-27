@@ -1,0 +1,21 @@
+server:
+  port: 9090
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+spring:
+  application:
+    name: user-service
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.1.12:33306/Spring_OAuth2_Demo?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+    username: root
+    password: timmysql
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+feign:
+  hystrix:
+    enabled: true

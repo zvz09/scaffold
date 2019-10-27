@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    config:
+      name: service-user
+      profile: dev
+      discovery:
+        enabled: true
+        serviceId: config-server
