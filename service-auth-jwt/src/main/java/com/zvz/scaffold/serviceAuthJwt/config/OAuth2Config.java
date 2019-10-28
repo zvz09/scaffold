@@ -45,9 +45,9 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
     @Bean
     protected JwtAccessTokenConverter jwtTokenEnhancer() {
         //注意此处需要相应的jks文件
-        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("fzp-jwt.jks"), "fzp123".toCharArray());
+        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("zvz-jwt.jks"), "zvz123".toCharArray());
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        converter.setKeyPair(keyStoreKeyFactory.getKeyPair("fzp-jwt"));
+        converter.setKeyPair(keyStoreKeyFactory.getKeyPair("zvz-jwt"));
         return converter;
     }
 }
