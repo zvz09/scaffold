@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -22,7 +23,7 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory() //将客户端的信息存储在内存中
                 .withClient("user-service") //创建了一个Client为"user-service"的客户端
-                .secret("123456")
+                .secret(new BCryptPasswordEncoder().encode("123456"))
                 .scopes("service") //客户端的域
                 .authorizedGrantTypes("refresh_token", "password") //配置类验证类型为 refresh_token和password
                 .accessTokenValiditySeconds(12*300); //5min过期
