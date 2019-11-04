@@ -1,0 +1,23 @@
+package com.zvz.serviceblog.util;
+
+
+import com.zvz.serviceblog.common.CommonConstant;
+
+/**
+ * Created by Pan on 2016/11/16.
+ */
+public class ReturnUtil {
+    public static Boolean returnResult(Integer result) {
+        if (result > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public static String returnResult(Boolean result){
+        if(result){
+            return CommonConstant.OPERATE_SUCCESS_MESSAGE;
+        }
+        return CommonConstant.OPERATE_FAIL_MESSAGE;
+    }
+}
