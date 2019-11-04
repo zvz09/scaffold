@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zvz.serviceblog.dao.IGuestDao" >
+<mapper namespace="com.zvz.serviceblog.mapper.IGuestDao" >
   <resultMap id="BaseResultMap" type="com.zvz.serviceblog.model.Guest" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="email" property="email" jdbcType="VARCHAR" />
@@ -13,7 +13,7 @@
   </sql>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from t_guest
     where id = #{id,jdbcType=INTEGER}
@@ -25,9 +25,9 @@
   </delete>
 
   <insert id="insert" parameterType="com.zvz.serviceblog.model.Guest" useGeneratedKeys="true" keyProperty="id" >
-    insert into t_guest (id, email, nickname, 
+    insert into t_guest (id, email, nickname,
       personal_website, access_ip)
-    values (#{id,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR},
       #{personalWebsite,jdbcType=VARCHAR}, #{accessIp,jdbcType=VARCHAR})
   </insert>
 
