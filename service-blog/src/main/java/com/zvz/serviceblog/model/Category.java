@@ -18,5 +18,5 @@ public class Category extends TreeInfo {
     @NotEmpty(message = "描述不能为空")
     private String description;
     private String code;
-
+    private String status;
 }

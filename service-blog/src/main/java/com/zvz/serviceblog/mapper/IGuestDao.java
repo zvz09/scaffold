@@ -3,11 +3,12 @@ package com.zvz.serviceblog.mapper;
 
 
 import com.zvz.serviceblog.model.Guest;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
 
-/*@Repository*/
+@Repository
 public interface IGuestDao {
     /**
      *

@@ -16,6 +16,8 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-feign:
-  hystrix:
-    enabled: true
+
+mybatis:
+  type-aliases-package: com.zvz.serviceblog.model
+  mapper-locations: classpath:mapper/*.xml
+

@@ -10,6 +10,10 @@ import com.zvz.serviceblog.service.IMessageService;
 import com.zvz.serviceblog.vo.ArchiveVo;
 import com.zvz.serviceblog.vo.ArticleMessageVo;
 import com.zvz.serviceblog.vo.ArticleVo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +23,7 @@ import java.util.Map;
 
 @RequestMapping(value = "")
 @Controller
+@Api(value = "文章管理类")
 public class BArticleController {
     @Autowired
     private IBArticleService articleService;

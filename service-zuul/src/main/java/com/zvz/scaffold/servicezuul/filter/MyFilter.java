@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
  * run：过滤器的具体逻辑。可用很复杂，包括查sql，nosql去判断该请求到底有没有权限访问。
  */
 
-@Component
+
 public class MyFilter extends ZuulFilter {
 
     private static Logger log = LoggerFactory.getLogger(MyFilter.class);
