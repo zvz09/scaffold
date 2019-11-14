@@ -14,6 +14,8 @@ import com.artofsolving.jodconverter.DocumentConverter;
 import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
+import com.zvz.servicefileview.pool.OpenOffiiceConnectionPool;
+
 /**
  * 利用jodconverter(基于OpenOffice服务)将文件(*.doc、*.docx、*.xls、*.ppt)转化为html格式或者pdf格式，
  * 使用前请检查OpenOffice服务是否已经开启, OpenOffice进程名称：soffice.exe | soffice.bin
@@ -23,6 +25,8 @@ import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConv
 public class Doc2HtmlUtil {
 
     private static Doc2HtmlUtil doc2HtmlUtil;
+
+    private static OpenOffiiceConnectionPool openOffiiceConnectionPool = new OpenOffiiceConnectionPool();
 
     /**
      * 获取Doc2HtmlUtil实例
@@ -153,7 +157,7 @@ public class Doc2HtmlUtil {
         } catch (IOException e) {
         }
 
-        OpenOfficeConnection connection = new SocketOpenOfficeConnection(8100);
+       /* OpenOfficeConnection connection = new SocketOpenOfficeConnection(8100);
         try {
             connection.connect();
         } catch (ConnectException e) {
@@ -162,13 +166,23 @@ public class Doc2HtmlUtil {
         // convert
         DocumentConverter converter = new OpenOfficeDocumentConverter(connection);
         converter.convert(docInputFile, htmlOutputFile);
-        connection.disconnect();
-        // 转换完之后删除word文件
-        docInputFile.delete();
+        connection.disconnect();*/
+
+        try {
+            OpenOfficeConnection openOfficeConnection = openOffiiceConnectionPool.getConnection();
+            DocumentConverter converter = new OpenOfficeDocumentConverter(openOfficeConnection);
+            converter.convert(docInputFile, htmlOutputFile);
+            openOffiiceConnectionPool.returnConnection(openOfficeConnection);
+            // 转换完之后删除word文件
+            docInputFile.delete();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         return htmFileName;
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         Doc2HtmlUtil coc2HtmlUtil = getDoc2HtmlUtilInstance();
         File file = null;
         FileInputStream fileInputStream = null;
@@ -179,11 +193,17 @@ public class Doc2HtmlUtil {
 //		coc2HtmlUtil.file2Html(fileInputStream, "D:/poi-test/openOffice/xls","xls");
         coc2HtmlUtil.file2pdf(fileInputStream, "D:/poi-test/openOffice/xls","xls");
 */
-
-        file = new File("E:\\ccccc\\1234.doc");
-        fileInputStream = new FileInputStream(file);
+        long start = System.currentTimeMillis();
+        openOffiiceConnectionPool.createPool();
+        for(int i = 2 ;i<=3 ;i++){
+            file = new File("E:\\ccccc\\1234 - 副本 ("+i+").doc");
+            fileInputStream = new FileInputStream(file);
 //		coc2HtmlUtil.file2Html(fileInputStream, "D:/poi-test/openOffice/doc","doc");
-        coc2HtmlUtil.file2pdf(fileInputStream, "E:\\ccccc\\","doc");
+            coc2HtmlUtil.file2pdf(fileInputStream, "E:\\ccccc\\","doc");
+        }
+        openOffiiceConnectionPool.closeConnectionPool();
+        long end = System.currentTimeMillis();
+        System.out.println(end-start);
 
      /*   file = new File("D:/poi-test/周报模版.ppt");
         fileInputStream = new FileInputStream(file);
@@ -195,6 +215,7 @@ public class Doc2HtmlUtil {
 //		coc2HtmlUtil.file2Html(fileInputStream, "D:/poi-test/openOffice/docx","docx");
         coc2HtmlUtil.file2pdf(fileInputStream, "D:/poi-test/openOffice/docx","docx");
 */
+
     }
 
 }
